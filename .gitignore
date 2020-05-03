@@ -1,3 +1,98 @@
+*.project
+*.class
+*.classpath
+*.prefs
+*.jsdtscope
+target/
+*.settings
+.DS_Store
+*.log
+*.lck
+/target/
+# Directories #
+build/
+bin/
+target/
+tmp/
+test-output/
+log/
+
+# Compiled Files #
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.db
+*.log*
+
+######################
+# Windows
+######################
+
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+######################
+# OSX
+######################
+
+.DS_Store
+.svn
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+
+######################
+# Eclipse
+######################
+
+*.pydevproject
+.project
+.metadata
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+/src/main/resources/rebel.xml
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath
+
+######################
+# IntelliJ IDEA
+######################
+
+.idea
+*.iml
+
+
+appLogFile_IS_UNDEFINED
+audit.log
+FFDC/
+
+
 # Compiled class file
 *.class
 
