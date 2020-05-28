@@ -1,4 +1,4 @@
-package sorting_searching;
+package math;
 /*
  * https://leetcode.com/problems/powx-n/
  * 

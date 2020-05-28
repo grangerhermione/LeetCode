@@ -1,4 +1,4 @@
-package arrays;
+package math;
 /*
  * https://leetcode.com/problems/add-binary/
  * Add Binary:

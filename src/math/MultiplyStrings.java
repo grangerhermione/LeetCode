@@ -1,4 +1,4 @@
-package strings;
+package math;
 /*
  * https://leetcode.com/problems/multiply-strings/
  * Multiply Strings:
