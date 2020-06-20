@@ -1,6 +1,7 @@
 package strings;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -11,24 +12,25 @@ import java.util.List;
  * will not be larger than 20,100.
  */
 public class FindAllAnagramsInAString {
+	
 	public List<Integer> findAnagrams(String s, String p) {
-		char [] pArr=new char[26];
-		for(Character ch: p.toCharArray()){
-			pArr[ch-'a']++;
-		}
-		List<Integer> result = new ArrayList<>();
-		for(int i=0;i<s.length();i++){
-			char ch=s.charAt(i);
-			if(pArr[ch-'a']!=0){
-				char [] sArr=new char[26];
-				for(int j=i;j<s.length() && j<i+p.length();j++){
-					sArr[s.charAt(j)-'a']++;
-				}
-				if(new String(pArr).equals(new String(sArr))){
-					result.add(i);
-				}
-			}
-		}
-		return result;
-	}
+        char [] pArr=new char[26];
+        char [] sArr=new char[26];
+        for(Character ch: p.toCharArray()){
+            pArr[ch-'a']++;
+        }
+        List<Integer> result = new ArrayList<>();
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+            sArr[ch-'a']++;
+            if(i>=p.length()){
+                sArr[s.charAt(i-p.length())-'a']--;
+            }
+            if(Arrays.equals(sArr, pArr)){
+                result.add(i-p.length()+1);
+            }
+        }
+        return result;
+    }
+	
 }

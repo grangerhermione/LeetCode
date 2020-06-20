@@ -12,8 +12,8 @@ public class ReadNCharactersGivenRead4 extends Reader4{
 	public int read(char[] buf, int n) {
         int limit=n;
         int k=0;
+        char[] buffer = new char[4]; 
         while(limit>=4){
-            char[] buffer = new char[4]; 
             int r=read4(buffer);
             for(int i=0;i<r;i++){
                 buf[k++]=buffer[i];
@@ -23,22 +23,13 @@ public class ReadNCharactersGivenRead4 extends Reader4{
         if(limit<=0){
             return k;
         }
-        
-        char[] buffer = new char[4]; 
         int r=read4(buffer);
-        if(r>=limit){
-            for(int i=0;i<limit;i++){
-                buf[k++]=buffer[i];
-            }
-        }
-        else{
-             for(int i=0;i<r;i++){
-                buf[k++]=buffer[i];
-            }
+        int end=Math.min(limit, r);
+        for(int i=0;i<end;i++){
+            buf[k++]=buffer[i];
         }
         return k;
-        
-    }
+    } 
 }
 
 class Reader4{

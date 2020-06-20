@@ -1,8 +1,5 @@
 package strings;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /*
  * https://leetcode.com/problems/verifying-an-alien-dictionary/
  * Verifying an Alien Dictionary:
@@ -14,44 +11,30 @@ import java.util.Map;
  * given words are sorted lexicographicaly in this alien language.
  */
 public class VerifyingAnAlienDictionary {
-	public boolean isAlienSorted(String[] words, String order) {
-		Map<Character, Integer> alphabet=new HashMap<>();
-		for(int i=0;i<order.length();i++){
-			alphabet.put(order.charAt(i),i);
-		}
-
-		for(int i=0;i<words.length-1;i++){
-			//Compare i and i+1th word
-			int j=0;
-			int m=words[i].length();
-			int n=words[i+1].length();
-			int flag=0;
-			while(j<m && j<n){
-				if(words[i].charAt(j)!=words[i+1].charAt(j)){
-					if(alphabet.get(words[i].charAt(j))< alphabet.get(words[i+1].charAt(j))){
-						flag=1;
-						break; 
-					}
-					else{
-						return false;
-					}
-				}
-				j++;
-			}
-			if(flag==1){
-				continue;
-			}
-			if(j==m && j==n){
-				return true;
-			}
-			if(j==m){
-				return true;
-			}
-			if(j==n){
-				return false;
-			}
-
-		}
-		return true;
-	}
+	 public boolean isAlienSorted(String[] words, String order) {
+	        int index[]=new int[26];
+	        for(int i=0;i<order.length();i++){
+	            index[order.charAt(i)-'a']=i;
+	        }
+	        for(int i=0;i<words.length-1;i++){
+	            String word1=words[i];
+	            String word2=words[i+1];
+	            int flag=0;
+	            for(int j=0;j<Math.min(word1.length(), word2.length());j++){
+	                if(word1.charAt(j)!=word2.charAt(j)){
+	                    if(index[word1.charAt(j)-'a']>index[word2.charAt(j)-'a']){
+	                        return false;
+	                    }
+	                    flag=1;
+	                    break;
+	                }
+	            }
+	            if(flag==0 && word1.length()>word2.length()){
+	                return false;
+	            }
+	            
+	        }
+	        return true;
+	        
+	    }
 }

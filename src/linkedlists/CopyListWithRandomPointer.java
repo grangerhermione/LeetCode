@@ -11,38 +11,32 @@ import java.util.Map;
  */
 public class CopyListWithRandomPointer {
 	public Node copyRandomList(Node head) {
-		if(head==null){
-			return null;
-		}
-		Map<Node,Node> map=new HashMap<>();
-		Node newHead=new Node(head.val);
-		Node p=head;
-		Node q=newHead;
-
-		map.put(p,q);
-		p=p.next;
-		while(p!=null){
-			Node copy=new Node(p.val);
-			q.next=copy;
-			map.put(p,copy);
-			q=q.next;
-			p=p.next;
-		}
-		p=head;
-		q=newHead;
-
-		while(p!=null){
-			if(p.random!=null){
-				q.random=map.get(p.random);
-			}
-			else{
-				q.random=null;
-			}
-			p=p.next;
-			q=q.next;
-		}
-		return newHead;
-	}
+        Map<Node, Node> map=new HashMap<>();
+        Node curr=head;
+        Node newHead=new Node(0);
+        Node n=newHead;
+        while(curr!=null){
+            Node temp=new Node(curr.val);
+            temp.next=curr.next;
+            
+            map.put(curr, temp);
+            n.next=temp;
+            n=n.next;
+            curr=curr.next;
+            
+        }
+        curr=head;
+        n=newHead.next;
+        while(curr!=null){
+            if(curr.random!=null){
+                n.random = map.get(curr.random);
+            }
+            curr=curr.next;
+            n=n.next;
+        }
+        
+        return newHead.next;
+    }
 }
 
 class Node {

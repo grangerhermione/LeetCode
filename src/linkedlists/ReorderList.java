@@ -19,7 +19,7 @@ public class ReorderList {
 			slow=slow.next;
 		}
 
-		//Slow is at the start of second half
+		//Slow.next is at the start of second half
 		//Reverse the second half
 
 		ListNode p=slow.next;

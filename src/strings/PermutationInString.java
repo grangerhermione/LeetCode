@@ -1,7 +1,6 @@
 package strings;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Arrays;
 
 /*
  * https://leetcode.com/problems/permutation-in-string/
@@ -12,28 +11,22 @@ import java.util.Set;
  */
 public class PermutationInString {
 	public boolean checkInclusion(String s1, String s2) {
-        Set<Character> map=new HashSet<>();
+        int small[]=new int[26];
         for(char ch:s1.toCharArray()){
-            map.add(ch);
+            small[ch-'a']++;
         }
-        
-        char arr[]=new char[26];
-        for(char ch:s1.toCharArray()){
-            arr[ch-'a']++;
-        }
-        
+        int big[]=new int[26];
+        int n=s1.length();
         for(int i=0;i<s2.length();i++){
             char ch=s2.charAt(i);
-            if(map.contains(ch)){
-                char str[]=new char[26];
-                for(int j=i;j<i+s1.length() && j<s2.length();j++){
-                    str[s2.charAt(j)-'a']++;
-                }
-                if(new String(arr).equals(new String(str))){
-                    return true;
-                }
+            big[ch-'a']++;
+            if(i>=n){
+                big[s2.charAt(i-n)-'a']--;
+            }
+            if(Arrays.equals(small, big)){
+                return true;
             }
         }
         return false;
-	}
+    }
 }
