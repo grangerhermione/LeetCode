@@ -17,83 +17,69 @@ import java.util.Map;
  * The cache is initialized with a positive capacity..
  */
 public class LRUCache {
-	int size;
-	Map<Integer,Node> cache;
 	Node head;
-	Node tail;
-
-	public LRUCache(int capacity) {
-		cache=new HashMap<>();
-		size=capacity;
-	}
-
-	public int get(int key) {
-		if(!cache.containsKey(key)){
-			return -1;
-		}
-		Node n=cache.get(key);
-		delete(n);
-		insert(n);
-		return n.value;
-	}
-
-	public void put(int key, int value) {
-		if(cache.containsKey(key)){
-			Node n=cache.get(key);
-			n.value=value;
-			delete(n);
-			insert(n);
-			return;
-		}
-		if(cache.size()>=size){
-			cache.remove(head.key);
-			delete(head);
-		}
-
-		Node n=new Node(key,value);
-		cache.put(key, n);
-		insert(n);
-
-	}
-
-	private void insert(Node n){
-		if(tail!=null){
-			tail.next=n;
-		}
-		n.prev=tail;
-		n.next=null;
-		tail=n;
-		if(head==null){
-			head=tail;
-		}
-
-	}
-
-	private void delete(Node n){
-		if(n.prev!=null){
-			n.prev.next=n.next;
-		}
-		else{
-			head=n.next;
-		}
-
-		if(n.next!=null){
-			n.next.prev=n.prev;
-		}
-		else{
-			tail=n.prev;
-		}
-	}
-
-	class Node{
-		int key;
-		int value;
-		Node next;
-		Node prev;
-
-		public Node(int key, int value){
-			this.key=key;
-			this.value=value;
-		}
-	}
+    Node tail;
+    Map<Integer, Node> cache;
+    int capacity;
+    public LRUCache(int capacity) {
+        this.capacity=capacity;
+        cache=new HashMap<>();
+        head=new Node(-1, -1);
+        tail=new Node(-1, -1);
+        head.next=tail;
+        tail.prev=head;
+    }
+    
+    public int get(int key) {
+        if(!cache.containsKey(key)){
+            return -1;
+        }
+        Node n=cache.get(key);
+        delete(n);
+        insert(n);
+        return n.value;
+    }
+    
+    public void put(int key, int value) {
+        if(cache.containsKey(key)){
+            Node n=cache.get(key);
+            n.value=value;
+            delete(n);
+            insert(n);
+            return;
+        }
+        if(cache.size()==capacity){
+            Node n=head.next;
+            delete(n);
+            cache.remove(n.key);
+        }
+        Node n=new Node(key, value);
+        insert(n);
+        cache.put(key, n);
+    }
+    
+    private void insert(Node n){
+        //insert before tail
+        n.prev=tail.prev;
+        tail.prev=n;
+        n.prev.next=n;
+        n.next=tail;
+    }
+    
+    private void delete(Node n){
+        n.prev.next=n.next;
+        n.next.prev=n.prev;
+    }
+    
+    class Node{
+        int key;
+        int value;
+        Node prev;
+        Node next;
+        
+        Node(int key, int value){
+            this.key=key;
+            this.value=value;
+        }
+    }
 }

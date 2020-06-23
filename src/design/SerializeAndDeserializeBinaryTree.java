@@ -15,7 +15,7 @@ import java.util.List;
  * You just need to ensure that a binary tree can be serialized to a string and this 
  * string can be deserialized to the original tree structure.
  */
-public class SerializeAndDeSerializeBinaryTree {
+public class SerializeAndDeserializeBinaryTree {
 
 	// Encodes a tree to a single string.
 	public String serialize(TreeNode root) {

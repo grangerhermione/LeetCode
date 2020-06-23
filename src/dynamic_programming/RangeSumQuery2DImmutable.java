@@ -6,9 +6,9 @@ package dynamic_programming;
  * Given a 2D matrix matrix, find the sum of the elements inside the rectangle 
  * defined by its upper left corner (row1, col1) and lower right corner (row2, col2).
  */
-public class RangeSumQuery2D {
+public class RangeSumQuery2DImmutable {
 	int sum[][];
-	public RangeSumQuery2D(int[][] matrix) {
+	public RangeSumQuery2DImmutable(int[][] matrix) {
 		int m=matrix.length;
 		if(m!=0){
 			int n=matrix[0].length;
