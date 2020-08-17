@@ -1,7 +1,6 @@
 package trees;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,6 +25,9 @@ public class BinaryTreeVerticalOrderTraversal {
 		Queue<Integer> cols=new LinkedList<>();
 		Map<Integer, List<Integer>> map=new HashMap<>();
 
+		int minColumn=0;
+        int maxColumn=0;
+        
 		q.add(root);
 		cols.add(0);
 		while(!q.isEmpty()){
@@ -37,19 +39,18 @@ public class BinaryTreeVerticalOrderTraversal {
 					map.put(col, new ArrayList<Integer>());
 				}
 				map.get(col).add(node.val);
-
+				minColumn=Math.min(minColumn, col);
+                maxColumn=Math.max(maxColumn, col);
 				q.add(node.left);
 				cols.add(col-1);
 				q.add(node.right);
 				cols.add(col+1);
 			}
 		}
-
-		List<Integer> keys=new ArrayList<>(map.keySet());
-		Collections.sort(keys);
-		for(int i=0;i<keys.size();i++){
-			result.add(map.get(keys.get(i)));
-		}
+		
+		for(int i=minColumn;i<=maxColumn;i++){
+            result.add(map.get(i));
+        }
 
 		return result;
 	}
