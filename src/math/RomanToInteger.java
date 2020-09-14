@@ -1,4 +1,8 @@
 package math;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /*
  * https://leetcode.com/problems/roman-to-integer/
  * 
@@ -19,45 +23,26 @@ Input is guaranteed to be within the range from 1 to 3999.
 
 public class RomanToInteger {
 	public int romanToInt(String s) {
-		int[] nums = new int[s.length()];
-		for(int i=0;i<s.length();i++){
-			char c=s.charAt(i);
-			nums[i] = getRoman(c);
-		}
-		int sum = 0;
-		for(int i=0;i<nums.length-1;i++){
-			if(nums[i]<nums[i+1]){
-				sum -= nums[i];
-			}
-			else{
-				sum +=nums[i];
-			}
-		}
-		return sum+nums[s.length()-1];
+		Map<Character,Integer> map=new HashMap<>();
+        map.put('I',1);
+        map.put('V',5);
+        map.put('X',10);
+        map.put('L',50);
+        map.put('C',100);
+        map.put('D',500);
+        map.put('M',1000);
+        
+        int result=0;
+        for(int i=0;i<s.length()-1;i++){
+            if(map.get(s.charAt(i))<map.get(s.charAt(i+1))){
+                result-=map.get(s.charAt(i));
+            }
+            else{
+                result+=map.get(s.charAt(i));
+            }
+        }
+        result+=map.get(s.charAt(s.length()-1));
+        return result;
 	}
 
-	public int getRoman(char c){
-		if(c=='I'){
-			return 1;
-		}
-		else if(c=='V'){
-			return 5;
-		}
-		else if(c=='X'){
-			return 10;
-		}
-		else if(c=='L'){
-			return 50;
-		}
-		else if(c=='C'){
-			return 100;
-		}
-		else if(c=='D'){
-			return 500;
-		}
-		else if(c=='M'){
-			return 1000;
-		}
-		return 0;
-	}
 }
